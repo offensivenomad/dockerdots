@@ -1,0 +1,33 @@
+# Single character aliases
+alias i='sudo -i'
+alias x='exit'
+alias l='clear'
+alias c='cat'
+
+## Edit Configs
+alias a='nano "${HOME}"/.bash.d/aliases && source "${HOME}"/.bashrc && echo "BASH Reloaded!"'
+alias b='nano "${HOME}"/.bashrc && source "${HOME}"/.bashrc && echo "BASH Reloaded!"'
+alias xb='source "${HOME}"/.bashrc && echo "BASH Reloaded!"'
+
+## File Utils
+alias cp="sudo -u $USER cp -av"
+alias ln="sudo -u $USER ln -s"
+alias mkdir="sudo -u $USER mkdir -p"
+alias mv='sudo mv'
+alias rm='sudo rm -r'
+alias touch="sudo -u $USER touch"
+
+## File Permissions
+alias chown='sudo chown -R $USER:$USER'
+alias chmod='sudo chmod -R'
+alias own='sudo chown -R $USER:$USER'
+alias mod='sudo chmod -R +x'
+
+## Commands
+alias ipwan='dig +short myip.opendns.com @resolver1.opendns.com'
+
+## Locations
+alias bb='cd "${HOME}"/.bash.d'
+alias log='cd /var/log'
+alias www='cd /var/www'
+alias dots='cd "${HOME}"/.dotfiles'
