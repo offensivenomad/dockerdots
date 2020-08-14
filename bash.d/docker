@@ -2,21 +2,35 @@
 #
 # Docker Functions
 
-function dbash() {
-	DOTS="${HOME}"/.dotfiles
-	RDOT="${DOTS}"/rootrc
+alias dps='docker ps -a'
+alias drm='docker rm $1'
+alias dst='docker stop $1'
 
-	docker exec -ti \
-		-v "${DOTS}"/bash.d:"${HOME}"/.bash.d \
-		-v "${DOTS}"/config:"${HOME}"/.config \
-		-v "${DOTS}"/scripts:"${HOME}"/.scripts \
-		-v "${DOTS}"/bashrc:"${HOME}"/.bashrc \
-		-v "${DOTS}"/profile:"${HOME}"/.profile \
-		-v "${DOTS}"/bash_colors.sh:"${HOME}"/.bash_colors.sh \
-		-v "${DOTS}"/nanorc:/etc/nanorc \
-		-v "${RDOT}"/bash.d:"${ROOT}"/.bash.d \
-		"${RDOT}"/scripts:"${ROOT}"/.scripts \
-		"${RDOT}"/bashrc:"${ROOT}"/.bashrc \
-		"${RDOT}"/profile:"${ROOT}"/.profile
+function dconfig() {
+	docker network create xdc.pw
+}
+
+function dbash() {
+	docker exec -it \
 		"$1" /bin/bash
+}
+
+function dkali() {
+	DOTS="${HOME}"/.dotfiles
+
+	docker exec -it kali.d /bin/bash || \
+	docker run -ti \
+		--name kali.d \
+		--hostname kali \
+		-v "${HOME}"/data:/data \
+		-v /var/run/docker.sock:/var/run/docker.sock:ro \
+		-v "${DOTS}"/config:/root/.config \
+		-v "${DOTS}"/bash_colors.sh:/root/.bash_colors.sh \
+		-v "${DOTS}"/nanorc:/etc/nanorc:ro \
+		-v "${DOTS}"/bash.d:/root/.bash.d \
+		-v "${DOTS}"/functions.d:/root/.functions.d \
+		-v "${DOTS}"/scripts:/root/.scripts \
+		-v "${DOTS}"/bashrc:/root/.bashrc \
+		-v "${DOTS}"/profile:/root/.profile \
+		kalilinux/kali-rolling
 }

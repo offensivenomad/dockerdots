@@ -25,9 +25,11 @@ alias mod='sudo chmod -R +x'
 
 ## Commands
 alias ipwan='dig +short myip.opendns.com @resolver1.opendns.com'
+alias systemctl='sudo systemctl'
 
 ## Locations
 alias bb='cd "${HOME}"/.bash.d'
 alias log='cd /var/log'
 alias www='cd /var/www'
 alias dots='cd "${HOME}"/.dotfiles'
+alias ff='cd "${HOME}"/.functions.d'
